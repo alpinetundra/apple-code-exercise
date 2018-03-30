@@ -1,6 +1,7 @@
 gradle
 gradlew
 .gradle
+gradlew.bat
 .idea
 *.iml
 build
