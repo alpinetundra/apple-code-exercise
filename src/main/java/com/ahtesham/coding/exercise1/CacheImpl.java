@@ -2,19 +2,19 @@ package com.ahtesham.coding.exercise1;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-public enum CacheImpl implements Cache{
+public enum CacheImpl implements Cache<String, String>{
 
     INSTANCE{
 
-        private Map kvStore= new ConcurrentHashMap<>();
+        private Map<String, String> kvStore= new ConcurrentHashMap<>();
 
         @Override
-        public void put(Object key, Object value) {
+        public void put(String key, String value) {
             kvStore.put(key, value);
         }
 
         @Override
-        public Object get(Object key) {
+        public String get(String key) {
             return kvStore.get(key);
         }
     }
