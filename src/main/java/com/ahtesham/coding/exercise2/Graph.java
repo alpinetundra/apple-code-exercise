@@ -34,30 +34,38 @@ public class Graph {
         return result;
     }
 
-    public int connected(Node node1, Node node2){
-        int distance = 0;
-        Node current = findNode(node1.name());
+    //Exercise 1.2
+    public int connected(Node node1, Node node2) {
+        int distance = -1;
+        Map<Node, Boolean> vistedMap = new HashMap<>();
+        Map<Node, Node> prev = new HashMap<>();
         Queue<Node> queue = new LinkedList<Node>();
-        List<Node> visited = new ArrayList<>();
+        Node current = node1;
         queue.add(current);
+        vistedMap.put(current, true);
         while(!queue.isEmpty()){
             current = queue.remove();
-            if(! visited.contains(current)) {
-                distance++;
-                visited.add(current);
-                if(current.children().contains(node2)){
-                    return distance;
+            if (current.equals(node2)){
+                break;
+            }else{
+                for(Node node : current.children()){
+                    if(!vistedMap.containsKey(node)){
+                        queue.add(node);
+                        vistedMap.put(node, true);
+                        prev.put(node, current);
+                    }
                 }
-
-                current.children().stream().forEach(x -> {
-                    queue.add(x);
-                });
             }
         }
-
-
-        return -1;
+        if (!current.equals(node2)){
+            return distance;
+        }
+        for(Node node = node2; node != null; node = prev.get(node)) {
+            distance++;
+        }
+        return distance;
     }
+
 
 
     private Map<Node, List<Node>> initConnectionMap(Node node){
@@ -97,7 +105,6 @@ public class Graph {
                 }
                 current.children().stream().forEach(x -> {
                     stack.push(x);
-                   // System.out.print(x + ", ");
                 });
             }
         }
@@ -120,7 +127,7 @@ public class Graph {
         }
     }
 
-    public static Graph populateGraphEasy(){
+    public static Graph populateGraph(){
         Graph graph = new Graph();
         graph.addNode("B","A");
         graph.addNode("C","B");

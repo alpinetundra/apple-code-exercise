@@ -1,11 +1,12 @@
 package com.ahtesham.coding.exercise1;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-public enum CacheImpl implements Cache {
+public enum CacheImpl implements Cache{
 
     INSTANCE{
 
-        private ConcurrentHashMap kvStore= new ConcurrentHashMap();
+        private Map kvStore= new ConcurrentHashMap<>();
 
         @Override
         public void put(Object key, Object value) {

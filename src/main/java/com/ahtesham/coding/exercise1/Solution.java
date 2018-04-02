@@ -8,6 +8,7 @@ public class Solution {
     public static void main(String[] args) {
 
         System.out.println("dskj");
-        //CacheImpl<String, String>.INSTANCE.put();
+        CacheImpl.INSTANCE.put("hello","Jack");
+        System.out.println(CacheImpl.INSTANCE.get("hello"));
     }
 }
